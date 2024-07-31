@@ -1,5 +1,5 @@
-/* eslint-disable no-alert */
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import Swal from 'sweetalert2';
 
 export type Colors = 'red' | 'blue' | 'green' | 'yellow';
 const colors: Colors[] = ['blue', 'green', 'red', 'yellow'];
@@ -37,12 +37,22 @@ function useSimon():
     const check = playerSequence.some((c, i) => c !== sequence[i]);
     if (check) {
       if (playerSequence.length > pointsRef.current) {
-        pointsRef.current = sequence.length;
+        pointsRef.current = sequence.length - 1;
       }
-      alert(`Você errou! sua pontuação foi de ${sequence.length}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Você errou!\n Pontuação total: ${sequence.length - 1}`,
+      });
       reset();
     } else if (playerSequence.length === sequence.length && sequence.length > 0) {
-      alert('Acertou!');
+      Swal.fire({
+        position: 'top-end',
+        title: 'Acertou!',
+        showConfirmButton: false,
+        backdrop: false,
+        timer: 500,
+      });
       handleAddSequence();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
