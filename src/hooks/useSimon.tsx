@@ -1,5 +1,7 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
+import wrongAudio from '../sounds/wrong.mp3';
+import yellowAudio from '../sounds/yellow.mp3';
 
 export type Colors = 'red' | 'blue' | 'green' | 'yellow';
 const colors: Colors[] = ['blue', 'green', 'red', 'yellow'];
@@ -31,6 +33,9 @@ function useSimon():
 
   function handlePlayerClick(color: Colors) {
     setPlayerSequence((prev) => [...prev, color]);
+    const audio = new Audio(yellowAudio);
+    audio.volume = 0.1;
+    audio.play();
   }
 
   useEffect(() => {
@@ -44,6 +49,9 @@ function useSimon():
         title: 'Oops...',
         text: `Você errou!\n Pontuação total: ${sequence.length - 1}`,
       });
+      const audio = new Audio(wrongAudio);
+      audio.volume = 0.1;
+      audio.play();
       reset();
     } else if (playerSequence.length === sequence.length && sequence.length > 0) {
       Swal.fire({
