@@ -3,11 +3,9 @@
     "version": "1.0.0",
     "main": "./dist/main.js",
     "scripts": {
-        "start": "node .",
-        "vite": "vite",
         "dev": "vite",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "build": "tsc"
+        "build": "tsc && vite build"
     },
     "dependencies": {
         "react": "^18.2.0",
