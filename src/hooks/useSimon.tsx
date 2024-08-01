@@ -39,15 +39,15 @@ function useSimon():
   useEffect(() => {
     const check = playerSequence.some((c, i) => c !== sequence[i]);
     if (check) {
-      if (playerSequence.length > pointsRef.current) {
-        localStorage.setItem('points', JSON.stringify(sequence.length - 1));
-        pointsRef.current = sequence.length - 1;
-      }
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: `Você errou!\n Pontuação total: ${sequence.length - 1}`,
       });
+      if (playerSequence.length > pointsRef.current) {
+        localStorage.setItem('points', JSON.stringify(sequence.length - 1));
+        pointsRef.current = sequence.length - 1;
+      }
       const audio = new Audio(wrongAudio);
       audio.volume = 0.1;
       audio.play();

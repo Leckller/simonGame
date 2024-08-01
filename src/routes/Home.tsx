@@ -12,25 +12,28 @@ function Home() {
     config: { config }, volume: { volume },
   } = useContext(ContextGame);
 
+  // Lógica para mostrar a sequencia atual
   useEffect(() => {
-    // Lógica para mostrar a sequencia atual
     setDisabled(true);
-    const id = setInterval(() => {
-      setShine(undefined);
-      if (seqRef.current >= sequence.length) {
+
+    setTimeout(() => {
+      const id = setInterval(() => {
         setShine(undefined);
-        seqRef.current = 0;
-        setDisabled(false);
-        return clearInterval(id);
-      }
-      setShine(sequence[seqRef.current]);
-      const song = Song(sequence[seqRef.current]);
-      const audio = new Audio(song);
-      audio.volume = volume;
-      audio.play();
-      seqRef.current++;
-    }, difficulty);
-    return () => clearInterval(id);
+        if (seqRef.current >= sequence.length) {
+          setShine(undefined);
+          seqRef.current = 0;
+          setDisabled(false);
+          return clearInterval(id);
+        }
+        setShine(sequence[seqRef.current]);
+        const song = Song(sequence[seqRef.current]);
+        const audio = new Audio(song);
+        audio.volume = volume;
+        audio.play();
+        seqRef.current++;
+      }, difficulty);
+      return () => clearInterval(id);
+    }, 500);
   }, [sequence]);
 
   return (
