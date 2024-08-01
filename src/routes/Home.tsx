@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import useSimon, { Colors } from '../hooks/useSimon';
-import blueSound from '../sounds/blue.mp3';
-import Main from '../components/Main';
-import Header from '../components/Header';
+import { useContext, useEffect, useRef } from 'react';
+import Song from '../utils/Song';
+import ContextGame from '../Context/ContextGame';
+import { Header, Main } from '../components';
+import Config from '../components/Config';
 
 function Home() {
-  const [sequence, handlePlayerClick, pointsRef, handleStartGame] = useSimon();
-  const [shine, setShine] = useState<Colors>();
-  const [disabled, setDisabled] = useState(false);
   const seqRef = useRef(0);
+  const {
+    shine: { setShine }, disabled: { setDisabled },
+    difficulty: { difficulty }, game: { sequence },
+    config: { config }, volume: { volume },
+  } = useContext(ContextGame);
 
   useEffect(() => {
     // Lógica para mostrar a sequencia atual
@@ -22,30 +24,25 @@ function Home() {
         return clearInterval(id);
       }
       setShine(sequence[seqRef.current]);
-      const audio = new Audio(blueSound);
-      audio.volume = 0.1;
+      const song = Song(sequence[seqRef.current]);
+      const audio = new Audio(song);
+      audio.volume = volume;
       audio.play();
       seqRef.current++;
-    }, 500);
+    }, difficulty);
     return () => clearInterval(id);
   }, [sequence]);
 
   return (
     <div
-      className="flex flex-col justify-between items-center overflow-hidden
+      className="flex flex-col justify-center items-center overflow-hidden
     w-screen h-screen bg-[#252a54] text-[#d7e0ff]"
     >
-      <Header
-        handleStartGame={ handleStartGame }
-        sequence={ sequence }
-        pointsRef={ pointsRef }
-      />
-      <Main
-        handlePlayerClick={ handlePlayerClick }
-        sequence={ sequence }
-        shine={ shine }
-        disabled={ disabled }
-      />
+      {config && (
+        <Config />
+      )}
+      <Header />
+      <Main />
       <footer>
         Created by Ruy
       </footer>
