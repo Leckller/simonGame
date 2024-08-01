@@ -1,9 +1,8 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import wrongAudio from '../sounds/wrong.mp3';
-import yellowAudio from '../sounds/yellow.mp3';
+import { Colors } from '../Types/Colors';
 
-export type Colors = 'red' | 'blue' | 'green' | 'yellow';
 const colors: Colors[] = ['blue', 'green', 'red', 'yellow'];
 
 function getRandomColor(): Colors {
@@ -16,6 +15,7 @@ function useSimon():
   const [sequence, setSequence] = useState<Colors[]>([]);
   const [playerSequence, setPlayerSequence] = useState<Colors[]>([]);
   const pointsRef = useRef(0);
+
   function handleAddSequence() {
     setPlayerSequence([]);
     const color = getRandomColor();
@@ -33,9 +33,6 @@ function useSimon():
 
   function handlePlayerClick(color: Colors) {
     setPlayerSequence((prev) => [...prev, color]);
-    const audio = new Audio(yellowAudio);
-    audio.volume = 0.1;
-    audio.play();
   }
 
   useEffect(() => {
@@ -63,7 +60,7 @@ function useSimon():
       });
       handleAddSequence();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerSequence]);
 
   return [sequence, handlePlayerClick, pointsRef, handleStartGame];
