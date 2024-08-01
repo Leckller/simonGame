@@ -14,7 +14,8 @@ function useSimon():
 [Colors[], (color: Colors) => void, MutableRefObject<number>, () => void] {
   const [sequence, setSequence] = useState<Colors[]>([]);
   const [playerSequence, setPlayerSequence] = useState<Colors[]>([]);
-  const pointsRef = useRef(0);
+  const localPoints = +JSON.parse(localStorage.getItem('points')!);
+  const pointsRef = useRef(localPoints || 0);
 
   function handleAddSequence() {
     setPlayerSequence([]);
@@ -39,6 +40,7 @@ function useSimon():
     const check = playerSequence.some((c, i) => c !== sequence[i]);
     if (check) {
       if (playerSequence.length > pointsRef.current) {
+        localStorage.setItem('points', JSON.stringify(sequence.length - 1));
         pointsRef.current = sequence.length - 1;
       }
       Swal.fire({
