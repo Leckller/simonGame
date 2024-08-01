@@ -1,5 +1,5 @@
-import { Colors } from '../hooks/useSimon';
 import { blue, green, red, yellow } from '../sounds';
+import { Colors } from '../Types/Colors';
 
 export default function Song(color: Colors) {
   switch (color) {
