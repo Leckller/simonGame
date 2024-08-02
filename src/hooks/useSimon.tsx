@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import wrongAudio from '../sounds/wrong.mp3';
 import { Colors } from '../Types/Colors';
@@ -11,11 +11,11 @@ function getRandomColor(): Colors {
 }
 
 function useSimon(setWin: React.Dispatch<React.SetStateAction<boolean>>):
-[Colors[], (color: Colors) => void, MutableRefObject<number>, () => void] {
+[Colors[], (color: Colors) => void, number, () => void] {
   const [sequence, setSequence] = useState<Colors[]>([]);
   const [playerSequence, setPlayerSequence] = useState<Colors[]>([]);
   const localPoints = +JSON.parse(localStorage.getItem('points')!);
-  const pointsRef = useRef(localPoints || 0);
+  const [points, setPoints] = useState(localPoints || 0);
 
   function handleAddSequence() {
     setPlayerSequence([]);
@@ -44,9 +44,9 @@ function useSimon(setWin: React.Dispatch<React.SetStateAction<boolean>>):
         title: 'Oops...',
         text: `Você errou!\n Pontuação total: ${sequence.length - 1}`,
       });
-      if (playerSequence.length > pointsRef.current) {
+      if (playerSequence.length > points) {
         localStorage.setItem('points', JSON.stringify(sequence.length - 1));
-        pointsRef.current = sequence.length - 1;
+        setPoints(sequence.length - 1);
       }
       setWin(false);
       const audio = new Audio(wrongAudio);
@@ -60,7 +60,7 @@ function useSimon(setWin: React.Dispatch<React.SetStateAction<boolean>>):
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerSequence]);
 
-  return [sequence, handlePlayerClick, pointsRef, handleStartGame];
+  return [sequence, handlePlayerClick, points, handleStartGame];
 }
 
 export default useSimon;
