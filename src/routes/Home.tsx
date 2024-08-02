@@ -1,11 +1,9 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import Song from '../utils/Song';
 import ContextGame from '../Context/ContextGame';
 import { Header, Main } from '../components';
 import Config from '../components/Config';
-import { Colors } from '../Types/Colors';
 import winSound from '../sounds/741975__victor_natas__victory-sting-3.wav';
-import loseSound from '../sounds/538151__fupicat__8bit-fall.wav';
 import { colors } from '../utils/colors';
 
 function Home() {
