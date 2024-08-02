@@ -7,7 +7,7 @@ import { Colors } from '../Types/Colors';
 function ProviderGame({ children }: { children: ReactNode }) {
   const localVol = +JSON.parse(localStorage.getItem('volume')!);
   const localDiff = +JSON.parse(localStorage.getItem('difficulty')!) as Difficulty;
-  const [win, setWin] = useState(true);
+  const [win, setWin] = useState(false);
   const [sequence, handlePlayerClick, pointsRef, handleStartGame] = useSimon(setWin);
   const [shine, setShine] = useState<Colors>();
   const [disabled, setDisabled] = useState(false);
