@@ -7,7 +7,10 @@ export type ContextGameType = {
     sequence: Colors[],
     handlePlayerClick: (color: Colors) => void,
     pointsRef: MutableRefObject<number>,
-    handleStartGame:() => void },
+    handleStartGame:() => void,
+    win: boolean,
+    setWin: (p: boolean) => void
+  },
   shine: {
     shine: Colors | undefined,
     setShine: (c: Colors | undefined) => void,

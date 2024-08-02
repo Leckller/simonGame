@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import ContextGame from '../Context/ContextGame';
 
 function Header() {
-  const { game: { sequence, pointsRef, handleStartGame },
+  const { game: { sequence, pointsRef, handleStartGame, setWin },
     config: { setConfig } } = useContext(ContextGame);
   return (
     <header
@@ -18,7 +18,10 @@ function Header() {
           <button
             className="p-1 rounded-3xl w-[50%] border-2
           border-[#151932] text-[#151932] bg-[#ff6e72]"
-            onClick={ () => handleStartGame() }
+            onClick={ () => {
+              handleStartGame();
+              setWin(true);
+            } }
           >
             Start
           </button>
