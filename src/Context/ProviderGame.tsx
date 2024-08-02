@@ -8,7 +8,7 @@ function ProviderGame({ children }: { children: ReactNode }) {
   const localVol = +JSON.parse(localStorage.getItem('volume')!);
   const localDiff = +JSON.parse(localStorage.getItem('difficulty')!) as Difficulty;
   const [win, setWin] = useState(false);
-  const [sequence, handlePlayerClick, pointsRef, handleStartGame] = useSimon(setWin);
+  const [sequence, handlePlayerClick, points, handleStartGame] = useSimon(setWin);
   const [shine, setShine] = useState<Colors>();
   const [disabled, setDisabled] = useState(false);
   const [config, setConfig] = useState(false);
@@ -21,7 +21,7 @@ function ProviderGame({ children }: { children: ReactNode }) {
         config: { config, setConfig },
         shine: { setShine, shine },
         disabled: { disabled, setDisabled },
-        game: { handlePlayerClick, handleStartGame, pointsRef, sequence, win, setWin },
+        game: { handlePlayerClick, handleStartGame, points, sequence, win, setWin },
         difficulty: { difficulty, setDifficulty },
         volume: { setVolume, volume },
       } }

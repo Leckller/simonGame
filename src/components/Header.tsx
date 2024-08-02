@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import ContextGame from '../Context/ContextGame';
 
 function Header() {
-  const { game: { sequence, pointsRef, handleStartGame, setWin },
+  const { game: { sequence, points, handleStartGame, setWin },
     config: { setConfig } } = useContext(ContextGame);
   return (
     <header
@@ -12,7 +12,7 @@ function Header() {
       <h1 className="text-3xl">
         Simon Game
       </h1>
-      <p>{`Maior pontuação ${pointsRef.current}`}</p>
+      <p>{`Maior pontuação ${points}`}</p>
       {sequence.length === 0 && (
         <div className="w-[300px] flex flex-row gap-5">
           <button

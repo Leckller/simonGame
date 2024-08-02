@@ -1,4 +1,4 @@
-import { createContext, MutableRefObject } from 'react';
+import { createContext } from 'react';
 import { Colors } from '../Types/Colors';
 import { Difficulty } from '../Types/difficulty';
 
@@ -6,7 +6,7 @@ export type ContextGameType = {
   game: {
     sequence: Colors[],
     handlePlayerClick: (color: Colors) => void,
-    pointsRef: MutableRefObject<number>,
+    points: number,
     handleStartGame:() => void,
     win: boolean,
     setWin: (p: boolean) => void
