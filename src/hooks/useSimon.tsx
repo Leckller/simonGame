@@ -10,7 +10,7 @@ function getRandomColor(): Colors {
   return randomColor;
 }
 
-function useSimon():
+function useSimon(setWin: React.Dispatch<React.SetStateAction<boolean>>):
 [Colors[], (color: Colors) => void, MutableRefObject<number>, () => void] {
   const [sequence, setSequence] = useState<Colors[]>([]);
   const [playerSequence, setPlayerSequence] = useState<Colors[]>([]);
@@ -48,18 +48,13 @@ function useSimon():
         localStorage.setItem('points', JSON.stringify(sequence.length - 1));
         pointsRef.current = sequence.length - 1;
       }
+      setWin(false);
       const audio = new Audio(wrongAudio);
       audio.volume = 0.1;
       audio.play();
       reset();
     } else if (playerSequence.length === sequence.length && sequence.length > 0) {
-      Swal.fire({
-        position: 'top-end',
-        title: 'Acertou!',
-        showConfirmButton: false,
-        backdrop: false,
-        timer: 500,
-      });
+      setWin(true);
       handleAddSequence();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

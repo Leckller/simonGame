@@ -17,7 +17,7 @@ function Config() {
   return (
     <aside
       className="absolute bg-white flex flex-col items-center
-      gap-5
+      gap-5 z-50
       w-[80vw] max-w-[550px] h-[80vh] max-h-[500px] text-black
       "
     >
