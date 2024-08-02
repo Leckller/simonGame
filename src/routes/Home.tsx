@@ -61,7 +61,7 @@ function Home() {
         seqRef.current++;
       }, difficulty);
       return () => clearInterval(id);
-    }, 4200);
+    }, 4500);
 
     return () => clearInterval(idWin);
   }, [sequence]);

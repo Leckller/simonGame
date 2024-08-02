@@ -37,11 +37,26 @@ function Config() {
         <h2 className="text-lg font-semibold md:text-2xl">Dificuldade</h2>
         <article className="flex flex-row w-full justify-between flex-wrap">
           <label
-            className={ ` ${difficulty === 800 ? bg : ''} hover:cursor-pointer
+            className={ ` ${difficulty === 1200 ? bg : ''} hover:cursor-pointer
               w-[70px] rounded-2xl h-10 flex items-center justify-center
             ` }
           >
             Fácil
+            <input
+              className="invisible absolute"
+              name="difficulty"
+              checked={ difficulty === 1200 }
+              type="radio"
+              onClick={ () => handleChangeDiff(1200) }
+            />
+          </label>
+
+          <label
+            className={ ` ${difficulty === 800 ? bg : ''} hover:cursor-pointer
+              w-[70px] rounded-2xl h-10 flex items-center justify-center
+            ` }
+          >
+            Médio
             <input
               className="invisible absolute"
               name="difficulty"
@@ -52,22 +67,7 @@ function Config() {
           </label>
 
           <label
-            className={ ` ${difficulty === 400 ? bg : ''} hover:cursor-pointer
-              w-[70px] rounded-2xl h-10 flex items-center justify-center
-            ` }
-          >
-            Médio
-            <input
-              className="invisible absolute"
-              name="difficulty"
-              checked={ difficulty === 400 }
-              type="radio"
-              onClick={ () => handleChangeDiff(400) }
-            />
-          </label>
-
-          <label
-            className={ ` ${difficulty === 200 ? bg : ''} hover:cursor-pointer
+            className={ ` ${difficulty === 300 ? bg : ''} hover:cursor-pointer
               w-[70px] rounded-2xl h-10 flex items-center justify-center
             ` }
           >
@@ -75,9 +75,9 @@ function Config() {
             <input
               className="invisible absolute"
               name="difficulty"
-              checked={ difficulty === 200 }
+              checked={ difficulty === 300 }
               type="radio"
-              onClick={ () => handleChangeDiff(200) }
+              onClick={ () => handleChangeDiff(300) }
             />
           </label>
 

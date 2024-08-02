@@ -1,1 +1,1 @@
-export type Difficulty = 800 | 400 | 200 | 100;
+export type Difficulty = 1200 | 800 | 300 | 100;
